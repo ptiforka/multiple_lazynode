@@ -35,11 +35,16 @@ fi
         wget https://mdeck-download.s3.us-east-1.amazonaws.com/client/linux/start.sh
         source ./start.sh
 
-IDENTIFIER=$(cat ../account_id.txt)
-PIN=$(cat ../pin.txt)
-cd
+IDENTIFIER=$(cat "$HOME/account_id.txt")
+PIN=$(cat "$HOME/pin.txt")
+
+cd "$HOME/multipleforlinux"
 echo -e "${BLUE}Привязываем аккаунт с ID: $IDENTIFIER и PIN: $PIN...${NC}"
 ./multiple-cli bind --bandwidth-download 100 --identifier "$IDENTIFIER" --pin "$PIN" --storage 200 --bandwidth-upload 100
+
+# Автоматическая проверка статуса
+sleep 2
+./multiple-cli status
 
 
 # Автоматически проверяем статус
