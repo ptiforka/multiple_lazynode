@@ -13,9 +13,7 @@ if ! command -v curl &> /dev/null; then
     sudo apt update
     sudo apt install curl -y
 fi
-
-
-
+        sudo apt update && sudo apt upgrade -y
 
         rm -f ~/install.sh ~/update.sh ~/start.sh
         
@@ -32,16 +30,14 @@ fi
         # Переход в папку клиента
         cd
         cd multipleforlinux
-
-
         echo -e "${BLUE}Запускаем multiple-node...${NC}"
+        #nohup ./multiple-node > output.log 2>&1 &
         wget https://mdeck-download.s3.us-east-1.amazonaws.com/client/linux/start.sh
         source ./start.sh
 
 IDENTIFIER=$(cat ../account_id.txt)
 PIN=$(cat ../pin.txt)
-
-
+cd
 echo -e "${BLUE}Привязываем аккаунт с ID: $IDENTIFIER и PIN: $PIN...${NC}"
 ./multiple-cli bind --bandwidth-download 100 --identifier "$IDENTIFIER" --pin "$PIN" --storage 200 --bandwidth-upload 100
 
